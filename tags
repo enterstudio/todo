@@ -1,0 +1,33 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/6376762/
+AppBundle	src/AppBundle/AppBundle.php	/^class AppBundle extends Bundle$/;"	c	language:PHP	namespace:AppBundle	inherits:Bundle
+AppBundle	src/AppBundle/AppBundle.php	/^namespace AppBundle;$/;"	n	language:PHP
+AppBundle\\Controller	src/AppBundle/Controller/DefaultController.php	/^namespace AppBundle\\Controller;$/;"	n
+AppBundle\\Controller	src/AppBundle/Controller/GenusController.php	/^namespace AppBundle\\Controller;$/;"	n
+AppBundle\\Tests\\Controller	src/AppBundle/Tests/Controller/DefaultControllerTest.php	/^namespace AppBundle\\Tests\\Controller;$/;"	n
+Bundle	src/AppBundle/AppBundle.php	/^use Symfony\\Component\\HttpKernel\\Bundle\\Bundle;$/;"	a	language:PHP	namespace:AppBundle	typeref:unknown:Symfony\\Component\\HttpKernel\\Bundle\\Bundle
+Controller	src/AppBundle/Controller/DefaultController.php	/^use Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller
+Controller	src/AppBundle/Controller/GenusController.php	/^use Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller
+DefaultController	src/AppBundle/Controller/DefaultController.php	/^class DefaultController extends Controller$/;"	c	namespace:AppBundle\\Controller
+GenusController	src/AppBundle/Controller/GenusController.php	/^Class GenusController extends Controller$/;"	c	namespace:AppBundle\\Controller
+GenusControllerTest	src/AppBundle/Tests/Controller/DefaultControllerTest.php	/^class GenusControllerTest extends WebTestCase$/;"	c	namespace:AppBundle\\Tests\\Controller
+JsonResponse	src/AppBundle/Controller/GenusController.php	/^use Symfony\\Component\\HttpFoundation\\JsonResponse;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Symfony\\Component\\HttpFoundation\\JsonResponse
+Method	src/AppBundle/Controller/GenusController.php	/^use Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Method;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Method
+NoteBox	web/js/notes.react.js	/^var NoteBox = React.createClass({$/;"	v
+NoteList	web/js/notes.react.js	/^var NoteList = React.createClass({$/;"	v
+NoteSection	web/js/notes.react.js	/^var NoteSection = React.createClass({$/;"	v
+Request	src/AppBundle/Controller/DefaultController.php	/^use Symfony\\Component\\HttpFoundation\\Request;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Symfony\\Component\\HttpFoundation\\Request
+Response	src/AppBundle/Controller/GenusController.php	/^use Symfony\\Component\\HttpFoundation\\Response;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Symfony\\Component\\HttpFoundation\\Response
+Route	src/AppBundle/Controller/DefaultController.php	/^use Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route
+Route	src/AppBundle/Controller/GenusController.php	/^use Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route
+WebTestCase	src/AppBundle/Tests/Controller/DefaultControllerTest.php	/^use Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase;$/;"	a	namespace:AppBundle\\Tests\\Controller	typeref:unknown:Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase
+componentDidMount	web/js/notes.react.js	/^    componentDidMount: function() {$/;"	v
+getNotesAction	src/AppBundle/Controller/GenusController.php	/^    public function getNotesAction()$/;"	f	class:AppBundle\\Controller\\GenusController
+indexAction	src/AppBundle/Controller/DefaultController.php	/^    public function indexAction(Request $request)$/;"	f	class:AppBundle\\Controller\\DefaultController
+loadNotesFromServer	web/js/notes.react.js	/^    loadNotesFromServer: function() {$/;"	v
+showAction	src/AppBundle/Controller/GenusController.php	/^    public function showAction($genusName)$/;"	f	class:AppBundle\\Controller\\GenusController
+testShow	src/AppBundle/Tests/Controller/DefaultControllerTest.php	/^    public function testShow()$/;"	f	class:AppBundle\\Tests\\Controller\\GenusControllerTest
