@@ -39,10 +39,8 @@
         </whitelist>
     </filter>
 
-    <!--
     <php>
-        <server name="KERNEL_DIR" value="/var/www/src/todo/app/" />
+        <server name="KERNEL_DIR" value="/var/lib/jenkins/workspace/TodoList/app/" />
     </php>
-    -->
 </phpunit>
 
