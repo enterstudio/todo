@@ -8,14 +8,14 @@
     <property name="phpmd"   value="${basedir}/bin/phpmd"/>
     <property name="phpunit" value="${basedir}/bin/phpunit"/>
 
-    <target name="build" depends="prepare,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit,phpdox,-check-failure"/>
+    <target name="build" depends="prepare,composer,lint,phploc-ci,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit,phpdox,-check-failure"/>
 
     <target name="full-build" depends="prepare,static-analysis,phpunit,phpdox,-check-failure"
         description="Performs static analysis, runs the tests, and generates project documentation">
     </target>
 
     <target name="full-build-parallel"
-         depends="prepare,static-analysis-parallel,phpunit,phpdox,-check-failure"
+         depends="prepare,composer,static-analysis-parallel,phpunit,phpdox,-check-failure"
          description="Performs static analysis (executing the tools in parallel), runs the tests, and generates project documentation">
     </target>
 
@@ -56,6 +56,16 @@
         <mkdir dir="${basedir}/build/pdepend"/>
         <mkdir dir="${basedir}/build/phpdox"/>
         <property name="prepare.done" value="true"/>
+    </target>
+
+    <target name="composer" description="Installing composer dependencies">
+        <exec executable="composer" failonerror="true">
+            <arg value="install" />
+            <arg value="--dev" />
+            <arg value="--prefer-dist" />
+            <arg value="--no-progress" />
+            <env key="SYMFONY_ENV" value="test"/>
+        </exec>
     </target>
 
     <target name="lint" unless="lint.done" description="Perform syntax check of sourcecode files">
