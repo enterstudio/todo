@@ -64,7 +64,7 @@
             <arg value="--dev" />
             <arg value="--prefer-dist" />
             <arg value="--no-progress" />
-            <env key="SYMFONY_ENV" value="test"/>
+            <env key="SYMFONY_ENV" value="dev"/>
         </exec>
     </target>
 
