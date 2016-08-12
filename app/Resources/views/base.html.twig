@@ -12,6 +12,8 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        
+        <!--
         <div class="search-bar">
             <form method="GET" action="" class="js-sea-search sea-search">
                 <input type="search" name="q" placeholder="Search Sea Creatures" autocomplete="off" class="search-input">
@@ -25,15 +27,18 @@
                 <li><a href="#">Login</a></li>
             </ul>
         </header>
-
+		-->
+		
         <div class="main-content">
             {% block body %}{% endblock %}
         </div>
 
+        <!--
         <div class="footer">
             <p class="footer-text">Made with <span class="heart"><3</span> <a href="https://knpuniversity.com">KnpUniversity</a></p>
         </div>
-
+		-->
+		
         {% block javascripts %}
             <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
             <script src="{{ asset('js/main.js') }}"></script>

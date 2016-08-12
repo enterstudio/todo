@@ -7,9 +7,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 Class GenusController extends Controller
 {
+    /**
+     * @Route("/genus")
+     */
+    public function indexAction(Request $request)
+    {
+        return $this->render('genus/index.html.twig');
+    }
+    
     /**
      * @Route("/genus/{genusName}")
      */
