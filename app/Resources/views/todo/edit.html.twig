@@ -1,1 +1,13 @@
-EDIT, used to modify todos
+{#  {% form_theme form 'bootstrap_3_layout.html.twig' %}  #}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <a class="btn btn-default btn-sm" href="{{ path('todo_home') }}">back</a>
+    <h2 class="page_header">Editing {{ todo.name }}</h2>
+    {{ form_start(form) }}
+    	{{ form_widget(form) }}
+	{{ form_end(form) }}
+{% endblock %}

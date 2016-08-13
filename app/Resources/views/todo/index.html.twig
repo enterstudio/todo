@@ -1,1 +1,43 @@
-INDEX, used to list todos
+{% extends 'base.html.twig' %}
+
+
+{% block navigation %}
+	<li class="nav-item">
+		<a class="nav-link" href="{{ path('todo_home') }}">Todo Home</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="{{ path('todo_add') }}">Add Todo</a>
+	</li>
+{% endblock %}
+
+{% block body %}
+    <h2>Todo List</h2>
+    <p>May your list be as small as this code</p>
+    <table class="table table-hover table-striped table-sm">
+		<thead>
+			<tr>
+				<th>Id #</th>
+				<th>Todo Name</th>
+				<th>Description</th>
+				<th>Due Date</th>
+				<th>Priority</th>
+				<th>Completed</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for todo in todos %}
+				<tr>
+					<th scope="row">{{ todo.id }}</th>
+					<td>{{ todo.name }}</td>
+					<td>{{ todo.description|length > 30 ? todo.description|slice(0, 30) ~ '...' : todo.description }}</td>
+					<td>{{ todo.dueDate|date('F j, Y g:i a') }}</td>
+					<td>{{ todo.priority }}</td>
+					<td>{{ todo.completed }}</td>
+					<td><a href="{{ path('todo_view', {'id': todo.id}) }}" class="btn btn-sm btn-success">View</a><td>
+					<td><a href="{{ path('todo_edit', {'id': todo.id}) }}" class="btn btn-sm btn-info">Edit</a><td>
+					<td><a href="{{ path('todo_delete', {'id': todo.id}) }}" class="btn btn-sm btn-danger">Delete</a><td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

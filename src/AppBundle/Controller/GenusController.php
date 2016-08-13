@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 Class GenusController extends Controller
 {
     /**
-     * @Route("/genus")
+     * @Route("/genus", name="genus_home")
      */
     public function indexAction(Request $request)
     {

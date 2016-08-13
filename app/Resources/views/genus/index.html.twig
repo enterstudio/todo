@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
-
+{% block navigation %}
+	<li class="nav-item active">
+		<a class="nav-link" href="{{ path('genus_home') }}">Genus Home</a>
+	</li>
+{% endblock %}
+			
 {% block body %}
     <h2 class="genus-name">Genus's</h2>
 {% endblock %}
