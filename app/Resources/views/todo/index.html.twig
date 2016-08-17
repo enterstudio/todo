@@ -47,7 +47,7 @@
     <table id="todoTbl" class="table table-hover table-striped table-sm">
 		<thead>
 			<tr>
-				<th><span class="todo_count">{{ todos|length }}</span> todos</th>
+				<th><span class="todo_count">{{ todos|length }}</span> todos  </th>
 			</tr>
 		</thead>
 		<tbody>
@@ -66,6 +66,8 @@
 					<li class="filter"><a href="{{ path('todo_filter', {'filter': 'all'}) }}">All</a></li>
 					<li class="filter"><a href="{{ path('todo_filter', {'filter': 'active'}) }}">Active</a></li>
 					<li class="filter"><a href="{{ path('todo_filter', {'filter': 'completed'}) }}">Completed</a></li>
+					<li class="filter"><a href="{{ path('todo_filter', {'filter': 'clear_completed'}) }}">Delete Completed</a></li>
+					<li class="filter"><a href="{{ path('todo_filter', {'filter': 'clear_all'}) }}">Delete All</a></li>
 				</ul>
 			</nav>
 		</tfooter>

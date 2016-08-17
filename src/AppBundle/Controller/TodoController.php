@@ -198,6 +198,12 @@ class TodoController extends Controller
 		case 'active':
 			$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findActive($sessionId);
             break;
+        case 'clear_all':
+			$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->clearAll($sessionId);
+            break;
+        case 'clear_completed':
+			$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->clearCompleted($sessionId);
+            break;
         default:
 			$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findBySessionId($sessionId);
 		}

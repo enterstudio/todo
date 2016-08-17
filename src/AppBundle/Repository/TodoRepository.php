@@ -42,5 +42,29 @@ class TodoRepository extends EntityRepository
 			->setParameter('completed', 0);
         return $query->getResult();
     }
+    
+    public function clearAll($sess_id)
+    {
+    	$query = $this->getEntityManager()->createQuery(
+            'DELETE FROM AppBundle:Todo t WHERE t.sessionId = :id'
+		);
+        
+        $query->setParameter('id', $sess_id);
+        $numDeleted = $query->execute();
+        return null;
+    }
+    
+    public function clearCompleted($sess_id)
+    {
+    	$query = $this->getEntityManager()->createQuery(
+            'DELETE FROM AppBundle:Todo t WHERE t.sessionId = :id AND t.completed = :completed'
+		);
+        
+        $query->setParameter('id', $sess_id)
+			->setParameter('completed', 1);
+        $numDeleted = $query->execute();
+        
+        return $this->findBySessionId($sess_id);
+    }
    
 }

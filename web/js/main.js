@@ -4,7 +4,7 @@
 		$(this).delay(2000).fadeOut();
 	});
 	
-	$('img').on('click', function(e){ 
+	$(document).on('click', 'img.toggle', function(e){ 
 		var _this = $(this);
 		var data = this.id;
 		var arr = data.split('-');
@@ -60,7 +60,7 @@
 			var t = '#todoRow-' + arr[1];
 			
 			$(t).fadeOut(1000, function() {
-				$(t).remove()
+				$(t).remove();
 			});
 			
 			$todo_count -= 1;
@@ -143,23 +143,25 @@
 
 		// Callback handler on success
 		request.done(function (response, textStatus, jqXHR){
-			var src = 'images/checked.png';
-			var ds = 'images/unchecked.png';
-			
 			$('tbody > tr').remove();
 			
 			$.each(JSON.parse(response), function(k, v) {
 				var elements = [];
-				if(v.todo_status === 0) {
+				$('.todo_count').text(v.todo_count);
+				console.log(v.todo_count);
+				if(v.todo_status == 0) {
 					src = 'images/unchecked.png';
 					ds = 'images/checked.png';
+				} else {
+					src = 'images/checked.png';
+					ds = 'images/unchecked.png';
 				}
-
-				var currentElement = "<tr id='todoRow-" + v.todo_id + "'><td><img class='toggle' id='toggleCheck-" + v.todo_id + "' src=" + src + " data-swap=" + ds + "></td>" +
-				"<td>" + v.todo_desc + "</td><td><img id='todoDelete-" + v.todo_id + "' class='pull-right' src='images/delete.png'></td></tr>"
-    			
-    			elements.push(currentElement);
-    			$('tbody').append(elements);
+				
+				var currentElement = "<tr id='todoRow-" + v.todo_id + "'><td class='tiny'><img class='toggle' id='toggleCheck-" + v.todo_id + "' src=" + src + " data-swap=" + ds + "></td>" +
+				"<td>" + v.todo_desc + "</td><td><img id='todoDelete-" + v.todo_id + "' class='pull-right' src='images/delete.png'></td></tr>";
+				
+				elements.push(currentElement);
+				$('tbody').append(elements);
 			});
 		});
 		
