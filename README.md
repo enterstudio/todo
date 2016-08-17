@@ -8,6 +8,7 @@ A Symfony project created on August 10, 2016, 10:37 pm.
  - git clone [https://github.com/kedwards/todo.git](https://github.com/kedwards/todo.git "Todo Project") 
 
 ### Install required dependecies with composer ###
+ - cd todo
  - php composer install
 
 ### Configure DB parameters for the application ###
@@ -21,20 +22,19 @@ A Symfony project created on August 10, 2016, 10:37 pm.
  - mailer_user: **null**
  - mailer_password: **null**
 
-### Make folders available for www-data:admin users ###
-##### Note: The below permissions are very permissive ;-) #####
- - cd todo
- - sudo su -c 'chown -R www-data:admin app/ src/'
- - sudo su -c 'find app/ src/ -type d -exec chmod 775 {} \;'                  
- - sudo su -c 'find app/ src/ -type f -exec chmod 664 {} \;'
-
 ### Create Application db & users ###
  - From command line run:
-  - mysql -u root -p < app/build/db_init.sql
+  - mysql -u root -p < build/db_init.sql
 	
 ### Run Migrations and Schema update ###
  1. php app/console doctrine:migrations:migrate
  2. php app/console doctrine:schema:update --force
+
+### Make folders available for www-data:admin users ###
+##### Note: The below permissions are very permissive ;-) #####
+ - sudo su -c 'chown -R www-data:admin app/ src/'
+ - sudo su -c 'find app/ src/ -type d -exec chmod 775 {} \;'                  
+ - sudo su -c 'find app/ src/ -type f -exec chmod 664 {} \;'
 
 ### Configure vhost to point to <web_app_directory>/web	###
     server {                                                                                                         
