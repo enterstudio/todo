@@ -1,5 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block navigation %}
+    <ul class="nav navbar-nav">
+        <li><a href="{{ path('todo_home') }}">Todo</a></li>
+    </ul>
+{% endblock %}
+
+{% block sidebar %}
+	<h3>Add a new Todo</h3>
+	<p>Add a Todo, all fields are required.</p>
+{% endblock %}
 
 {% block body %}
     <a class="btn btn-default btn-sm" href="{{ path('todo_home') }}">back</a>

@@ -2,12 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\GenusType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 Class GenusController extends Controller
 {
@@ -16,11 +18,22 @@ Class GenusController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('genus/index.html.twig');
+        $form = $this->createForm(GenusType::class);
+    	$form->add('submit', SubmitType::class);
+        
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()) {
+        	$genusName = $form['name']->getData();
+        
+        	return $this->redirectToRoute('genus_view', ['genusName' => $genusName]);
+        }
+		
+		return $this->render('genus/index.html.twig', ['form' => $form->createView()]);
     }
     
     /**
-     * @Route("/genus/{genusName}")
+     * @Route("/genus/{genusName}", name="genus_view")
      */
     public function showAction($genusName)
     {

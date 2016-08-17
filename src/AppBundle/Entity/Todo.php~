@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="todo")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TodoRepository")
  */
-class Todo implements \Serializable 
+class Todo implements \Serializable
 {
     /**
      * @var int

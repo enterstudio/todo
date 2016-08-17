@@ -1,43 +1,78 @@
+{#  {% form_theme form 'bootstrap_3_layout.html.twig' %}  #}
+{# {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %} #}
+
 {% extends 'base.html.twig' %}
 
+{% block title %}
+	Todo List
+{% endblock %}
 
 {% block navigation %}
-	<li class="nav-item">
-		<a class="nav-link" href="{{ path('todo_home') }}">Todo Home</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="{{ path('todo_add') }}">Add Todo</a>
-	</li>
+    <ul class="nav navbar-nav">
+        <li><a href="{{ path('todo_home') }}">Todo</a></li>
+    </ul>
+{% endblock %}
+
+{% block sidebar %}
+	<br />
+	<p>This simple todo list can help you complete your daily tasks on time, use it responsibly!</p>
+	<hr />
+	<h3>Technologies</h3>
+	<ul>
+		<li><a href="https://symfony.com/" target="_blank">Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</a> - Symfony is a set of reusable PHP components...The standard foundation on which the best PHP applications are built. Choose any of the 30 stand-alone components available for your own applications.</li>
+		<li><a href="http://getbootstrap.com/" target="_blank">Bootstrap 3</a> - Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.</li>
+		<li><a href="https://jquery.com/" target="_blank">Jquery 3.1.0</a> - Query is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers.</li>
+	</ul>
+	<hr />
+	<h3>Resources</h3>
+	<ul>
+		<li><a href="http://todomvc.com/examples/jquery/#/all" target="_blank">Todo MVC Example</li>
+		<li><a href="http://symfony.com/doc/current/quick_tour/the_big_picture.html" target="_blank">Symfony Documentation</li>
+		<li><a href="http://symfony.com/doc/current/quick_tour/the_big_picture.html" target="_blank">Bootstrap Documentation</li>
+		<li><a href="http://api.jquery.com/" target="_blank">Jquery Documentation</li>
+	</ul>
+	<br />
 {% endblock %}
 
 {% block body %}
     <h2>Todo List</h2>
+    <h4>Service: {{ text }}</h6>
     <p>May your list be as small as this code</p>
-    <table class="table table-hover table-striped table-sm">
+    <form id="todoForm" action="{{  path('todo_add') }}" method="post" novalidate>
+		<div id="todo_div" class="input-group">
+    		<input id="todo_input" class="form-control custom-control" type="text" autocomplete="off" size="300" name="todo" type="submit" placeholder="What do I want to accomplish..." required autofocus>
+    		<input type="hidden" id="todo_id" name="todo_id" value="1" />
+    	</div>
+    </form>
+    <table id="todoTbl" class="table table-hover table-striped table-sm">
 		<thead>
 			<tr>
-				<th>Id #</th>
-				<th>Todo Name</th>
-				<th>Description</th>
-				<th>Due Date</th>
-				<th>Priority</th>
-				<th>Completed</th>
+				<th><span class="todo_count">{{ todos|length }}</span> todos</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for todo in todos %}
-				<tr>
-					<th scope="row">{{ todo.id }}</th>
-					<td>{{ todo.name }}</td>
-					<td>{{ todo.description|length > 30 ? todo.description|slice(0, 30) ~ '...' : todo.description }}</td>
-					<td>{{ todo.dueDate|date('F j, Y g:i a') }}</td>
-					<td>{{ todo.priority }}</td>
-					<td>{{ todo.completed }}</td>
-					<td><a href="{{ path('todo_view', {'id': todo.id}) }}" class="btn btn-sm btn-success">View</a><td>
-					<td><a href="{{ path('todo_edit', {'id': todo.id}) }}" class="btn btn-sm btn-info">Edit</a><td>
-					<td><a href="{{ path('todo_delete', {'id': todo.id}) }}" class="btn btn-sm btn-danger">Delete</a><td>
+				<tr id="todoRow-{{ todo.id }}">
+					<td class="tiny"><a href="/todo/complete/{{ todo.id }}"><img class="toggle" id="toggleCheck-{{ todo.id }}" {% if todo.completed %} src="{{ asset('images/checked.png') }}" data-swap="{{ asset('images/unchecked.png') }}" {% else %} src="{{ asset('images/unchecked.png') }}" data-swap="{{ asset('images/checked.png') }}" {% endif %} ></a></td>
+					<td id="todoDesc-{{ todo.id }}" {% if todo.completed %} class="completed" {% endif %} ><div contenteditable class="pull-left">{{ todo.description|length > 50 ? todo.description|slice(0, 50) ~ '...' : todo.description }}</div></td>
+					<!--<td><a href="{{ path('todo_edit', {'id': todo.id}) }}" class="btn btn-xs pull-right btn-info">Edit</a><td>-->
+					<td class="tiny"><img class="delete pull-right" id="todoDelete-{{ todo.id }}" src="{{ asset('images/delete.png') }}"></td>
 				</tr>
 			{% endfor %}
 		</tbody>
+		<tfooter>
+			<nav aria-label="todo_filter">
+				<ul class="pager">
+					<li class="active"><a href="{{ path('todo_filter', {'filter': 'all'}) }}">All</a></li>
+					<li><a href="{{ path('todo_filter', {'filter': 'active'}) }}">Active</a></li>
+					<li><a href="{{ path('todo_filter', {'filter': 'completed'}) }}">Completed</a></li>
+				</ul>
+			</nav>
+		</tfooter>
 	</table>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('vendor/TableEdit/js/tableEdit-0.1.js') }}"></script>
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'todo/index.html.twig' %}
+
+{% block navigation %}
+    <ul class="nav navbar-nav">
+        <li><a href="{{ path('todo_home') }}">Todo</a></li>
+    </ul>
+{% endblock %}
+
+{% block body %}
+    <header id="header">
+    	<h2>Todo Cookie</h2>
+	</header>
+	{% if "action" == 'read' %}
+    	<p>test READ cookie varName = {{ val }} .
+	{% else %}
+		<p>test WRITE cookie varName = {{ val }} . 
+	{% endif %}
+{% endblock %}
