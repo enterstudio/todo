@@ -99,4 +99,4 @@ A Symfony project created on August 10, 2016, 10:37 pm.
 ### Browse Application ###
 ** change host to match the given server_name **
 
-[http://todo.kncedwards.com/todo](http://todo.kncedwards.com/todo  "Browse Todo App")
+[https://todo.kncedwards.com/todo](http://todo.kncedwards.com/todo  "Browse Todo App")
