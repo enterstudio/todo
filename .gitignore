@@ -9,5 +9,6 @@ app/phpunit.xml
 build/*
 !build/*.xml
 vendor/
+!web/vendor/TableEdit
 bin/
 composer.phar

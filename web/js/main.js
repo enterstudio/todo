@@ -174,12 +174,12 @@
 		event.preventDefault();
 	});
 	
-	$("#todoTbl").tableEdit({
-        columnsTr: "2", //null = all columns editable
-        enableDblClick: true, //enable edit td with dblclick
-        callback: function(e){
-            console.log(e.id);
-
-        }
-    });
+	//$("#todoTbl").tableEdit({
+    //    columnsTr: "2", //null = all columns editable
+     //   enableDblClick: true, //enable edit td with dblclick
+     //   callback: function(e){
+     //       console.log(e.id);
+//
+ //       }
+  //  });
 }(jQuery);

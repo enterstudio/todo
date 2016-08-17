@@ -179,7 +179,7 @@ class TodoController extends Controller
     }
 
 	/**
-     * @Route("todo/filter/{filter}", name="todo_filter")
+     * @Route("/todo/filter/{filter}", name="todo_filter")
      */
     public function filterAction($filter = 'all')
     {
@@ -197,7 +197,9 @@ class TodoController extends Controller
 			break;
 		case 'active':
 			$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findActive($sessionId);
-			break;
+            break;
+        default:
+			$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findBySessionId($sessionId);
 		}
 		
 		$todo_count = count($todos);
