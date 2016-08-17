@@ -4,6 +4,7 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	0.0.0	/6376762/
+AbstractMigration	app/DoctrineMigrations/Version20160817125926.php	/^use Doctrine\\DBAL\\Migrations\\AbstractMigration;$/;"	a	namespace:AppBundle\\Migrations	typeref:unknown:Doctrine\\DBAL\\Migrations\\AbstractMigration
 AbstractType	src/AppBundle/Form/Todo2Type.php	/^use Symfony\\Component\\Form\\AbstractType;$/;"	a	namespace:AppBundle\\Form	typeref:unknown:Symfony\\Component\\Form\\AbstractType
 AppBundle	src/AppBundle/AppBundle.php	/^class AppBundle extends Bundle$/;"	c	language:PHP	namespace:AppBundle	inherits:Bundle
 AppBundle	src/AppBundle/AppBundle.php	/^namespace AppBundle;$/;"	n	language:PHP
@@ -12,8 +13,10 @@ AppBundle\\Controller	src/AppBundle/Controller/GenusController.php	/^namespace A
 AppBundle\\Controller	src/AppBundle/Controller/TodoController.php	/^namespace AppBundle\\Controller;$/;"	n
 AppBundle\\Entity	src/AppBundle/Entity/Todo2.php	/^namespace AppBundle\\Entity;$/;"	n
 AppBundle\\Form	src/AppBundle/Form/Todo2Type.php	/^namespace AppBundle\\Form;$/;"	n
+AppBundle\\Migrations	app/DoctrineMigrations/Version20160817125926.php	/^namespace AppBundle\\Migrations;$/;"	n
 AppBundle\\Repository	src/AppBundle/Repository/Todo2Repository.php	/^namespace AppBundle\\Repository;$/;"	n
 AppBundle\\Tests\\Controller	src/AppBundle/Tests/Controller/DefaultControllerTest.php	/^namespace AppBundle\\Tests\\Controller;$/;"	n
+AppKernel	app/AppKernel.php	/^class AppKernel extends Kernel$/;"	c
 Bundle	src/AppBundle/AppBundle.php	/^use Symfony\\Component\\HttpKernel\\Bundle\\Bundle;$/;"	a	language:PHP	namespace:AppBundle	typeref:unknown:Symfony\\Component\\HttpKernel\\Bundle\\Bundle
 Controller	src/AppBundle/Controller/DefaultController.php	/^use Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller
 Controller	src/AppBundle/Controller/GenusController.php	/^use Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller
@@ -25,6 +28,8 @@ GenusController	src/AppBundle/Controller/GenusController.php	/^Class GenusContro
 GenusControllerTest	src/AppBundle/Tests/Controller/DefaultControllerTest.php	/^class GenusControllerTest extends WebTestCase$/;"	c	namespace:AppBundle\\Tests\\Controller
 JsonResponse	src/AppBundle/Controller/GenusController.php	/^use Symfony\\Component\\HttpFoundation\\JsonResponse;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Symfony\\Component\\HttpFoundation\\JsonResponse
 JsonResponse	src/AppBundle/Controller/TodoController.php	/^use Symfony\\Component\\HttpFoundation\\JsonResponse;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Symfony\\Component\\HttpFoundation\\JsonResponse
+Kernel	app/AppKernel.php	/^use Symfony\\Component\\HttpKernel\\Kernel;$/;"	a	typeref:unknown:Symfony\\Component\\HttpKernel\\Kernel
+LoaderInterface	app/AppKernel.php	/^use Symfony\\Component\\Config\\Loader\\LoaderInterface;$/;"	a	typeref:unknown:Symfony\\Component\\Config\\Loader\\LoaderInterface
 Method	src/AppBundle/Controller/GenusController.php	/^use Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Method;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Method
 Method	src/AppBundle/Controller/TodoController.php	/^use Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Method;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Method
 NoteBox	web/js/notes.react.js	/^var NoteBox = React.createClass({$/;"	v
@@ -39,6 +44,7 @@ Response	src/AppBundle/Controller/TodoController.php	/^use Symfony\\Component\\H
 Route	src/AppBundle/Controller/DefaultController.php	/^use Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route
 Route	src/AppBundle/Controller/GenusController.php	/^use Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route
 Route	src/AppBundle/Controller/TodoController.php	/^use Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route
+Schema	app/DoctrineMigrations/Version20160817125926.php	/^use Doctrine\\DBAL\\Schema\\Schema;$/;"	a	namespace:AppBundle\\Migrations	typeref:unknown:Doctrine\\DBAL\\Schema\\Schema
 Session	src/AppBundle/Controller/TodoController.php	/^use Symfony\\Component\\HttpFoundation\\Session\\Session;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Symfony\\Component\\HttpFoundation\\Session\\Session
 SubmitType	src/AppBundle/Controller/TodoController.php	/^use Symfony\\Component\\Form\\Extension\\Core\\Type\\SubmitType;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:Symfony\\Component\\Form\\Extension\\Core\\Type\\SubmitType
 TextareaType	src/AppBundle/Form/Todo2Type.php	/^use Symfony\\Component\\Form\\Extension\\Core\\Type\\TextareaType;$/;"	a	namespace:AppBundle\\Form	typeref:unknown:Symfony\\Component\\Form\\Extension\\Core\\Type\\TextareaType
@@ -48,6 +54,7 @@ Todo2Repository	src/AppBundle/Repository/Todo2Repository.php	/^class Todo2Reposi
 Todo2Type	src/AppBundle/Form/Todo2Type.php	/^class Todo2Type extends AbstractType$/;"	c	namespace:AppBundle\\Form
 TodoController	src/AppBundle/Controller/TodoController.php	/^class TodoController extends Controller$/;"	c	namespace:AppBundle\\Controller
 TodoType	src/AppBundle/Controller/TodoController.php	/^use AppBundle\\Form\\TodoType;$/;"	a	namespace:AppBundle\\Controller	typeref:unknown:AppBundle\\Form\\TodoType
+Version20160817125926	app/DoctrineMigrations/Version20160817125926.php	/^class Version20160817125926 extends AbstractMigration$/;"	c	namespace:AppBundle\\Migrations
 WebTestCase	src/AppBundle/Tests/Controller/DefaultControllerTest.php	/^use Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase;$/;"	a	namespace:AppBundle\\Tests\\Controller	typeref:unknown:Symfony\\Bundle\\FrameworkBundle\\Test\\WebTestCase
 addAction	src/AppBundle/Controller/TodoController.php	/^    public function addAction(Request $request)$/;"	f	class:AppBundle\\Controller\\TodoController
 buildForm	src/AppBundle/Form/Todo2Type.php	/^    public function buildForm(FormBuilderInterface $builder, array $options)$/;"	f	class:AppBundle\\Form\\Todo2Type
@@ -57,6 +64,7 @@ componentDidMount	web/js/notes.react.js	/^    componentDidMount: function() {$/;
 configureOptions	src/AppBundle/Form/Todo2Type.php	/^    public function configureOptions(OptionsResolver $resolver)$/;"	f	class:AppBundle\\Form\\Todo2Type
 cookieAction	src/AppBundle/Controller/TodoController.php	/^	public function cookieAction($value = 'ABCDEFG', Request $request)$/;"	f	class:AppBundle\\Controller\\TodoController
 deleteAction	src/AppBundle/Controller/TodoController.php	/^    public function deleteAction($id, Request $request)$/;"	f	class:AppBundle\\Controller\\TodoController
+down	app/DoctrineMigrations/Version20160817125926.php	/^    public function down(Schema $schema)$/;"	f	class:AppBundle\\Migrations\\Version20160817125926
 editAction	src/AppBundle/Controller/TodoController.php	/^    public function editAction($id, Request $request)$/;"	f	class:AppBundle\\Controller\\TodoController
 filterAction	src/AppBundle/Controller/TodoController.php	/^    public function filterAction($filter = 'all')$/;"	f	class:AppBundle\\Controller\\TodoController
 getCompleted	src/AppBundle/Entity/Todo2.php	/^    public function getCompleted()$/;"	f	class:AppBundle\\Entity\\Todo2
@@ -67,8 +75,11 @@ id	src/AppBundle/Entity/Todo2.php	/^    private $id;$/;"	v	class:AppBundle\\Enti
 indexAction	src/AppBundle/Controller/DefaultController.php	/^    public function indexAction(Request $request)$/;"	f	class:AppBundle\\Controller\\DefaultController
 indexAction	src/AppBundle/Controller/TodoController.php	/^    public function indexAction(Request $request)$/;"	f	class:AppBundle\\Controller\\TodoController
 loadNotesFromServer	web/js/notes.react.js	/^    loadNotesFromServer: function() {$/;"	v
+registerBundles	app/AppKernel.php	/^    public function registerBundles()$/;"	f	class:AppKernel
+registerContainerConfiguration	app/AppKernel.php	/^    public function registerContainerConfiguration(LoaderInterface $loader)$/;"	f	class:AppKernel
 setCompleted	src/AppBundle/Entity/Todo2.php	/^    public function setCompleted($completed)$/;"	f	class:AppBundle\\Entity\\Todo2
 setTodo2	src/AppBundle/Entity/Todo2.php	/^    public function setTodo2($todo2)$/;"	f	class:AppBundle\\Entity\\Todo2
 showAction	src/AppBundle/Controller/GenusController.php	/^    public function showAction($genusName)$/;"	f	class:AppBundle\\Controller\\GenusController
 testShow	src/AppBundle/Tests/Controller/DefaultControllerTest.php	/^    public function testShow()$/;"	f	class:AppBundle\\Tests\\Controller\\GenusControllerTest
 todo2	src/AppBundle/Entity/Todo2.php	/^    private $todo2;$/;"	v	class:AppBundle\\Entity\\Todo2
+up	app/DoctrineMigrations/Version20160817125926.php	/^    public function up(Schema $schema)$/;"	f	class:AppBundle\\Migrations\\Version20160817125926

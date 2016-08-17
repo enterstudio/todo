@@ -33,7 +33,8 @@
         "phploc/phploc": "*",
         "phpunit/phpunit": "5.5.*",
         "theseer/phpdox": "0.8.*",
-        "escapestudios/symfony2-coding-standard": "2.9.*"
+        "escapestudios/symfony2-coding-standard": "2.9.*",
+        "doctrine/doctrine-migrations-bundle": "^1.0"
     },
     "scripts": {
         "post-install-cmd": [
