@@ -24,7 +24,7 @@ class Version20160817125926 extends AbstractMigration
                 sess_lifetime mediumint(9) NOT NULL,
                 PRIMARY KEY (sess_id)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;'
-        )
+        );
     }
 
     /**
