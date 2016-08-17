@@ -128,7 +128,7 @@
 		event.preventDefault();
 	});
 	
-	$(document).on('click', 'li>a', function(e){ 
+	$(document).on('click', 'li.filter>a', function(e){ 
 		var request;
 		var filter = this.href.substr(this.href.lastIndexOf('/') + 1);
 		
