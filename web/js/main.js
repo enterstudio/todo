@@ -1,9 +1,29 @@
-+function ($) {
+(function ($) {
 	// fade out flash messenger
 	$('.alert').delay(500).fadeIn('normal', function() {
 		$(this).delay(2000).fadeOut();
 	});
 	
+	$('.editable').blur(function(){
+		var request;
+		
+		if (request) {
+			request.abort();
+		}
+		
+		var myTxt = $(this).html();
+		var data = this.id;
+		var arr = data.split('-');
+		
+		request = $.ajax({
+			type: 'post',
+			url:  '/todo/edit/' + arr[1],
+			data: 'todo=' + myTxt
+		});
+		
+		
+	});
+
 	$(document).on('click', 'img.toggle', function(e){ 
 		var _this = $(this);
 		var data = this.id;
@@ -23,13 +43,6 @@
 		request.done(function (response, textStatus, jqXHR){
 			_this.attr('src', swap).attr("data-swap",current);
 			$(t).toggleClass("completed");
-			
-			// if(_this.attr("src") == '/images/unchecked') {
-			// 	$todo_count += 1;
-			// } else {
-			// 	$todo_count -= 1;
-			// }
-			// $('.todo_count').text($todo_count);
 		});
 		
 		// Callback handler on failure
@@ -148,8 +161,8 @@
 			$.each(JSON.parse(response), function(k, v) {
 				var elements = [];
 				$('.todo_count').text(v.todo_count);
-				console.log(v.todo_count);
-				if(v.todo_status == 0) {
+				
+				if(v.todo_status === 0) {
 					src = 'images/unchecked.png';
 					ds = 'images/checked.png';
 				} else {
@@ -175,13 +188,4 @@
 		});
 		event.preventDefault();
 	});
-	
-	//$("#todoTbl").tableEdit({
-    //    columnsTr: "2", //null = all columns editable
-     //   enableDblClick: true, //enable edit td with dblclick
-     //   callback: function(e){
-     //       console.log(e.id);
-//
- //       }
-  //  });
-}(jQuery);
+})(jQuery);

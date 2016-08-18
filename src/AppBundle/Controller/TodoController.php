@@ -92,9 +92,27 @@ class TodoController extends Controller
      */
     public function editAction($id, Request $request)
     {
-        $todo = $this->getDoctrine()->getRepository('AppBundle:Todo')->find($id);
+		$session = $this->get('session');
+		$sessionId = $session->getId();
+		
+		$todo = $this->getDoctrine()->getRepository('AppBundle:Todo')->find($id);
+        
+       	$isAjax = $this->get('Request')->isXMLHttpRequest();
+		if ($isAjax) {         
+			$todo_desc = $request->get('todo');
+			$todo->setDescription($todo_desc);
+			
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($todo);
+			$em->flush();
+			
+			return new JsonResponse([
+				'status' => 'success'
+			]);
+		}
+        
         $form = $this->createForm(TodoType::class, $todo);
-    
+        
         $form->add('submit', SubmitType::class, [
             'label' => 'Save Todo'
         ]);
@@ -102,20 +120,19 @@ class TodoController extends Controller
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()) {
-        	$todo->setName($form['name']->getData());
-        	$todo->setDescription($form['description']->getData());
-        	$todo->setCategory($form['category']->getData());
-        	$todo->setPriority($form['priority']->getData());
-        	$todo->setDueDate($form['dueDate']->getData());
-        	$todo->setCompleted(0);
-        	
-        	$em = $this->getDoctrine()->getManager();
-        	$em->persist($todo);
-        	$em->flush();
-        	
-        	$this->addFlash('notice', 'Todo Saved Succesfully!');
-        	
-        	return $this->redirectToRoute('todo_home');
+			$todo->setDescription($form['name']->getData());
+			$todo->setCompleted(0);
+			
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($todo);
+			$em->flush();
+			
+			$this->addFlash('notice', 'Todo Saved Succesfully!');
+			
+			$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findBySessionId($sessionId);
+			$session->set('todos', $todos);
+			
+			return $this->redirectToRoute('todo_home', ['todos', $todos]);
         }
         
         return $this->render('todo/edit.html.twig', ['todo' => $todo, 'form' => $form->createView()]);
@@ -245,8 +262,9 @@ class TodoController extends Controller
 	{
 		if ($value == 'read') {
 			$cookies = $request->cookies->all();
-			$value = $cookies["varName"];
+			$cookie_val = $cookies["varName"];
 		} else {
+			$cookie_val = $value;
 			$response = new Response();          
 			$response->headers->setCookie(new Cookie('varName', $value, time() + (3600 * 48)));
 			$response->sendHeaders();
@@ -254,7 +272,7 @@ class TodoController extends Controller
 		
 		return $this->render('todo/cookie.html.twig', [
         	'action' => $value,
-        	'val' => $value
+        	'val' => $cookie_val
         ]);
 	}
 }

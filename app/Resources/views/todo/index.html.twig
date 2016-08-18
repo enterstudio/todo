@@ -54,8 +54,7 @@
 			{% for todo in todos %}
 				<tr id="todoRow-{{ todo.id }}">
 					<td class="tiny"><a href="/todo/complete/{{ todo.id }}"><img class="toggle" id="toggleCheck-{{ todo.id }}" {% if todo.completed %} src="{{ asset('images/checked.png') }}" data-swap="{{ asset('images/unchecked.png') }}" {% else %} src="{{ asset('images/unchecked.png') }}" data-swap="{{ asset('images/checked.png') }}" {% endif %} ></a></td>
-					<td id="todoDesc-{{ todo.id }}" {% if todo.completed %} class="completed" {% endif %} ><div contenteditable class="pull-left">{{ todo.description|length > 50 ? todo.description|slice(0, 50) ~ '...' : todo.description }}</div></td>
-					<!--<td><a href="{{ path('todo_edit', {'id': todo.id}) }}" class="btn btn-xs pull-right btn-info">Edit</a><td>-->
+					<td {% if todo.completed %} class="completed" {% endif %}><div id="todoDesc-{{ todo.id }}" class="editable pull-left" contenteditable>{{ todo.description|length > 50 ? todo.description|slice(0, 50) ~ '...' : todo.description }}</div></td>
 					<td class="tiny"><img class="delete pull-right" id="todoDelete-{{ todo.id }}" src="{{ asset('images/delete.png') }}"></td>
 				</tr>
 			{% endfor %}
