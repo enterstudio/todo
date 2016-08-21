@@ -169,13 +169,14 @@ class TodoController extends Controller
     /**
      * @Route("/todo/complete/{id}", name="todo_complete")
      */
-    public function completeAction($id)
+    public function completeAction($id, Request $request)
     {
         $session = $this->get('session');
 		$sessionId = $session->getId();
+        $status = $request->get('status');
         
         $todo = $this->getDoctrine()->getRepository('AppBundle:Todo')->find($id);
-        $todo->setCompleted(1);
+        $todo->setCompleted($status);
         
         $em = $this->getDoctrine()->getManager();
         $em->persist($todo);

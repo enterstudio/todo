@@ -1,5 +1,4 @@
 (function ($) {
-	// fade out flash messenger
 	$('.alert').delay(500).fadeIn('normal', function() {
 		$(this).delay(2000).fadeOut();
 	});
@@ -11,83 +10,87 @@
 			request.abort();
 		}
 		
-		var myTxt = $(this).html();
-		var data = this.id;
-		var arr = data.split('-');
-		
+		var todoTxt = $(this).html();
+		var id = this.id.split('-')[1];
+
 		request = $.ajax({
+			url:  '/todo/edit/' + id,
 			type: 'post',
-			url:  '/todo/edit/' + arr[1],
-			data: 'todo=' + myTxt
+			data: 'todo=' + todoTxt
 		});
 		
+		request.done(function (response, textStatus, jqXHR){
+		});
 		
+		request.fail(function (jqXHR, textStatus, errorThrown){
+			console.error('The following error occurred: ' + textStatus, errorThrown);
+		});
+		event.preventDefault();
 	});
 
-	$(document).on('click', 'img.toggle', function(e){ 
-		var _this = $(this);
-		var data = this.id;
-		var arr = data.split('-');
-		var current = _this.attr("src");
-		var swap = _this.attr("data-swap");     
-		var t = '#todoDesc-' + arr[1];
-		var $todo_count = parseInt($('.todo_count').text(), 10);
-			
+	$('#todoTbl').on('click', 'img.toggle', function(e){ 
+		var request;
+		
+		if (request) {
+			request.abort();
+		}
+		
+		var id = this.id.split('-')[1];
+		var current = $(this).attr('src');
+		var swap = $(this).attr('data-swap');
+		console.log(current);
+		var status = current === '/images/checked.png' ? 0 : 1;
+		var desc = '#todoDesc-' + id;
+		var toggle_img = '#toggleCheck-' + id;
+		var todo_count = parseInt($('.todo_count').text(), 10);
+		
 		request = $.ajax({
-			url: "/todo/complete/" + arr[1],
-			type: "post",
-			data: arr[1]
+			url: '/todo/complete/' + id,
+			type: 'post',
+		 	data: 'status=' + status
 		});
 		
-		// Callback handler on success
 		request.done(function (response, textStatus, jqXHR){
-			_this.attr('src', swap).attr("data-swap",current);
-			$(t).toggleClass("completed");
+			console.log('current: ' + current + ' changing to ' + swap);
+			$(toggle_img).attr('src', swap).attr('data-swap', current);
+		 	$(desc).toggleClass('completed');
 		});
 		
-		// Callback handler on failure
 		request.fail(function (jqXHR, textStatus, errorThrown){
-			// Log the error to the console
-			console.error(
-				"The following error occurred: " +
-				textStatus, errorThrown
-			);
+			console.error('The following error occurred: ' + textStatus, errorThrown);
 		});
 		event.preventDefault();
 	});
 	
-	$(document).on('click', 'img.delete', function(e){ 
-		var data = this.id;
-		var arr = data.split('-');
-		var t = '#todoDelete-' + arr[1];
-		var $todo_count = parseInt($('.todo_count').text(), 10);
+	$('#todoTbl').on('click', 'img.delete', function(e){ 
+		var request;
+		
+		if (request) {
+			request.abort();
+		}
+		
+		var id = this.id.split('-')[1];
+		var t = '#todoRow-' + id;
+		var todo_count = parseInt($('.todo_count').text(), 10);
 		
 		request = $.ajax({
-			url: "/todo/delete/" + arr[1],
+			url: "/todo/delete/" + id,
 			type: "post",
-			data: arr[1]
+			data: "todoId=" + id
 		});
 		
-		// Callback handler on success
 		request.done(function (response, textStatus, jqXHR){
-			var t = '#todoRow-' + arr[1];
-			
 			$(t).fadeOut(1000, function() {
 				$(t).remove();
 			});
 			
-			$todo_count -= 1;
-			$('.todo_count').text($todo_count);
+			todo_count -= 1;
+			$('.todo_count').text(todo_count);
 			e.preventDefault();
 		});
 		
-		// Callback handler on failure
 		request.fail(function (jqXHR, textStatus, errorThrown){
-			// Log the error to the console
-			console.error(
-				"The following error occurred: " +
-				textStatus, errorThrown
-			);
+			console.error("The following error occurred: " + textStatus, errorThrown);
 		});
 		event.preventDefault();
 	});   
@@ -99,12 +102,11 @@
 			request.abort();
 		}
 		
-		var $todo_count = parseInt($('.todo_count').text(), 10);
-		var $form = $(this);
-		var $inputs = $form.find("input");
-		var serializedData = $form.serialize();
+		var todo_count = parseInt($('.todo_count').text(), 10);
+		var inputs = $(this).find("input");
+		var serializedData = $(this).serialize();
 		
-		$inputs.prop("disabled", true);
+		inputs.prop("disabled", true);
 		
 		request = $.ajax({
 			url: "/todo/add",
@@ -112,31 +114,26 @@
 			data: serializedData
 		});
 		
-		// Callback handler on success
 		request.done(function (response, textStatus, jqXHR){
 			$(":input, #todo").val('');
-			$('tbody').fadeIn(1000).append(
-				"<tr id='todoRow-" + response.todo_id + "'><td><img class='toggle' id='toggleCheck-" + response.todo_id + "' src='images/unchecked.png' data-swap='images/checked.png'></td>" +
-				"<td>" + response.todo +
-				"</td><td><img id='todoDelete-" + response.todo_id + "' class='pull-right' src='images/delete.png'></td></tr>"
+			$('#todoTbl').fadeIn(1000).append(
+				"<tr id='todoRow-" + response.todo_id + "'>" +
+				"<td><img class='toggle' id='toggleCheck-" + response.todo_id + "' src='images/unchecked.png' data-swap='images/checked.png'></td>" +
+				"<td><div id='todoDesc-" + response.todo_id + "' class='editable pull-left' contenteditable>" + response.todo + "</div></td>" +
+				"<td class='tiny'><img id='todoDelete-" + response.todo_id + "' class='delete pull-right' src='images/delete.png'></td>" +
+				"</tr>"
 			);
 			
-			$todo_count += 1;
-			$('.todo_count').text($todo_count);
+			todo_count += 1;
+			$('.todo_count').text(todo_count);
 		});
 		
-		// Callback handler on failure
 		request.fail(function (jqXHR, textStatus, errorThrown){
-			// Log the error to the console
-			console.error(
-				"The following error occurred: " +
-				textStatus, errorThrown
-			);
+			console.error("The following error occurred: " + textStatus, errorThrown);
 		});
 		
-		// Callback handler that will be called regardless
 		request.always(function () {
-			$inputs.prop("disabled", false);
+			inputs.prop("disabled", false);
 		});
 		event.preventDefault();
 	});
