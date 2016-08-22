@@ -132,20 +132,21 @@
 		event.preventDefault();
 	});
 	
-	$(document).on('click', 'li.filter>a', function(e){ 
+	$(document).on('click', 'li.filter', function(e){ 
 		var request;
 		var filter = $(this).attr('data-filter');
 		
 		if (request) {
 			request.abort();
-		}	
+		}
+		
+		$(this).addClass('active').siblings().removeClass('active');
 		
 		request = $.ajax({
 		 	url: "/todo",
 		 	type: "post",
 		 	data: "filter=" + filter
 		});
-		
 		
 		request.done(function (response, textStatus, jqXHR){
 			var elements = [];

@@ -10,6 +10,12 @@ body {
 	color: #d9d9d9;
 }
 
+a:active, a:hover {
+    outline: 0;
+    text-decoration: none;
+    background-color: #eee;
+}
+
 @media (max-width: 979px) {
     body {
         padding-top: 0px;

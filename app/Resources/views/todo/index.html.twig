@@ -41,15 +41,15 @@
     		<input type="hidden" id="todo_id" name="todo_id" value="1" />
     	</div>
     </form>
-	<nav aria-label="todo_filter">
-		<ul class="pager">
-			<li class="filter"><a href="/todo" data-filter="all">All</a></li>
-			<li class="filter"><a href="/todo" data-filter="active">Active</a></li>
-			<li class="filter"><a href="/todo" data-filter="completed">Completed</a></li>
-			<li class="filter"><a href="/todo" data-filter="clear_completed">Delete Completed</a></li>
-			<li class="filter"><a href="/todo" data-filter="clear_all">Delete All</a></li>
+	<br />
+		<ul class="nav nav-pills">
+			<li class="active filter" data-filter="all"><a href="/todo"><span class="glyphicon glyphicon-home"></span>  All</a></li>
+			<li class="filter" data-filter="active"><a href="/todo" ><span class="glyphicon glyphicon-refresh"></span> Active</a></li>
+			<li class="filter" data-filter="completed"><a href="/todo"><span class="glyphicon glyphicon-ok"></span> Completed</a></li>
+			<li class="filter" data-filter="clear_completed"><a href="/todo"><span class="glyphicon glyphicon-trash"></span> Delete Completed</a></li>
+			<li class="filter" data-filter="clear_all"><a href="/todo"><span class="glyphicon glyphicon-trash"></span> Delete All</a></li>
 		</ul>
-	</nav>
+	<br />
     <div><span class="todo_count">{{ todos|length }}</span> todos</div>
     <table id="todoTbl" class="table table-hover table-striped table-sm">
 		{% for todo in todos %}
