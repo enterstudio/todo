@@ -5,14 +5,13 @@
 	
 	$('.editable').blur(function(){
 		var request;
-		
-		if (request) {
-			request.abort();
-		}
-		
 		var todoTxt = $(this).html();
 		var id = this.id.split('-')[1];
 
+		if (request) {
+			request.abort();
+		}
+	
 		request = $.ajax({
 			url:  '/todo/edit/' + id,
 			type: 'post',
@@ -30,19 +29,17 @@
 
 	$('#todoTbl').on('click', 'img.toggle', function(e){ 
 		var request;
-		
-		if (request) {
-			request.abort();
-		}
-		
 		var id = this.id.split('-')[1];
 		var current = $(this).attr('src');
 		var swap = $(this).attr('data-swap');
-		console.log(current);
 		var status = current === '/images/checked.png' ? 0 : 1;
 		var desc = '#todoDesc-' + id;
 		var toggle_img = '#toggleCheck-' + id;
 		var todo_count = parseInt($('.todo_count').text(), 10);
+		
+		if (request) {
+			request.abort();
+		}
 		
 		request = $.ajax({
 			url: '/todo/complete/' + id,
@@ -51,7 +48,6 @@
 		});
 		
 		request.done(function (response, textStatus, jqXHR){
-			console.log('current: ' + current + ' changing to ' + swap);
 			$(toggle_img).attr('src', swap).attr('data-swap', current);
 		 	$(desc).toggleClass('completed');
 		});
@@ -64,14 +60,13 @@
 	
 	$('#todoTbl').on('click', 'img.delete', function(e){ 
 		var request;
+		var id = this.id.split('-')[1];
+		var t = '#todoRow-' + id;
+		var todo_count = parseInt($('.todo_count').text(), 10);
 		
 		if (request) {
 			request.abort();
 		}
-		
-		var id = this.id.split('-')[1];
-		var t = '#todoRow-' + id;
-		var todo_count = parseInt($('.todo_count').text(), 10);
 		
 		request = $.ajax({
 			url: "/todo/delete/" + id,
@@ -97,14 +92,13 @@
 
 	$('#todoForm').on('submit', function(e){
 		var request;
+		var todo_count = parseInt($('.todo_count').text(), 10);
+		var inputs = $(this).find("input");
+		var serializedData = $(this).serialize();
 		
 		if (request) {
 			request.abort();
 		}
-		
-		var todo_count = parseInt($('.todo_count').text(), 10);
-		var inputs = $(this).find("input");
-		var serializedData = $(this).serialize();
 		
 		inputs.prop("disabled", true);
 		
@@ -140,48 +134,53 @@
 	
 	$(document).on('click', 'li.filter>a', function(e){ 
 		var request;
-		var filter = this.href.substr(this.href.lastIndexOf('/') + 1);
+		var filter = $(this).attr('data-filter');
 		
-		if (filter === 'filter') {
-			filter = 'all';
-		}
+		if (request) {
+			request.abort();
+		}	
 		
 		request = $.ajax({
-			url: "/todo/filter/" + filter,
-			type: "post"
-		});
-
-		// Callback handler on success
-		request.done(function (response, textStatus, jqXHR){
-			$('tbody > tr').remove();
-			
-			$.each(JSON.parse(response), function(k, v) {
-				var elements = [];
-				$('.todo_count').text(v.todo_count);
-				
-				if(v.todo_status === 0) {
-					src = 'images/unchecked.png';
-					ds = 'images/checked.png';
-				} else {
-					src = 'images/checked.png';
-					ds = 'images/unchecked.png';
-				}
-				
-				var currentElement = "<tr id='todoRow-" + v.todo_id + "'><td class='tiny'><img class='toggle' id='toggleCheck-" + v.todo_id + "' src=" + src + " data-swap=" + ds + "></td>" +
-				"<td>" + v.todo_desc + "</td><td><img id='todoDelete-" + v.todo_id + "' class='pull-right' src='images/delete.png'></td></tr>";
-				
-				elements.push(currentElement);
-				$('tbody').append(elements);
-			});
+		 	url: "/todo",
+		 	type: "post",
+		 	data: "filter=" + filter
 		});
 		
-		// Callback handler on failure
+		
+		request.done(function (response, textStatus, jqXHR){
+			var elements = [];
+			var currentElement;
+			
+			$('#todoTbl tr').remove();
+			$('span.todo_count').html(response.todos.length);
+			
+			$.each(response, function(key, value) {
+				$.each(value, function(k, v) {
+					if(v.todo_status === "0") {
+						src = 'images/unchecked.png';
+						ds = 'images/checked.png';
+						desc_class = 'editable pull-left';
+					} else {
+						src = 'images/checked.png';
+						ds = 'images/unchecked.png';
+						desc_class = 'completed editable pull-left';
+					}
+					
+					currentElement = "<tr id='todoRow-" + v.todo_id + "'>" +
+					"<td><img class='toggle' id='toggleCheck-" + v.todo_id + "' src='" + src + "' data-swap='" + ds + "'></td>" +
+					"<td><div id='todoDesc-" + v.todo_id + "' class='" + desc_class + "' contenteditable>" + v.todo_desc + "</div></td>" +
+					"<td class='tiny'><img id='todoDelete-" + v.todo_id + "' class='delete pull-right' src='images/delete.png'></td>" +
+					"</tr>";
+					
+					elements.push(currentElement);
+				});
+			});
+			
+			$('tbody').append(elements);
+		});
+		
 		request.fail(function (jqXHR, textStatus, errorThrown){
-			// Log the error to the console
-			console.error(
-				"The following error occurred: " +
-				textStatus, errorThrown
-			);
+			console.error("The following error occurred: " + textStatus, errorThrown);
 		});
 		event.preventDefault();
 	});

@@ -26,7 +26,20 @@ class TodoController extends Controller
 		$session = $this->get('session');
 		$sessionId = $session->getId();
 		
+		$isAjax = $this->get('Request')->isXMLHttpRequest();
+		if ($isAjax) {         
+			$filter = $request->get('filter');
+			
+			$todos = $this->getFilteredTodos($sessionId, $filter);
+			$session->set('todos', $todos);
+			
+			return new JsonResponse([
+				'todos' => $todos
+			]);
+		}
+		
 		$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findBySessionId($sessionId);
+		
 		$session->set('todos', $todos);
 		
         return $this->render('todo/index.html.twig', [
@@ -197,63 +210,47 @@ class TodoController extends Controller
     }
 
 	/**
-     * @Route("/todo/filter/{filter}", name="todo_filter")
+     * 
      */
-    public function filterAction($filter = 'all')
+    private function getFilteredTodos($sid, $filter = 'all')
     {
-		$customService = $this->get('custom_service');
-		
-		$session = $this->get('session');
-		$sessionId = $session->getId();
-		
 		switch ($filter) {
-		case 'all':
-			$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findBySessionId($sessionId);
-			break;
-		case 'completed':
-			$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findCompleted($sessionId);
-			break;
-		case 'active':
-			$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findActive($sessionId);
-            break;
-        case 'clear_all':
-			$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->clearAll($sessionId);
-            break;
-        case 'clear_completed':
-			$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->clearCompleted($sessionId);
-            break;
-        default:
-			$todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findBySessionId($sessionId);
+			case 'all':
+				$ftodos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findBySessionId($sid);
+				break;
+			case 'completed':
+				$ftodos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findCompleted($sid);
+				break;
+			case 'active':
+				$ftodos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findActive($sid);
+				break;
+			case 'clear_all':
+				$ftodos = $this->getDoctrine()->getRepository('AppBundle:Todo')->clearAll($sid);
+				break;
+			case 'clear_completed':
+				$ftodos = $this->getDoctrine()->getRepository('AppBundle:Todo')->clearCompleted($sid);
+				break;
+			default:
+				$ftodos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findBySessionId($sid);
 		}
 		
-		$todo_count = count($todos);
+		$todo_count = count($ftodos);
+		$todos = [];
 		
-		$isAjax = $this->get('Request')->isXMLHttpRequest();
-		if ($isAjax) {         
-			$response = [];
-			if(isset($todos)) {
-				foreach ($todos as $todo) {
-					$response[] = [
-						'todo_count' => $todo_count,
-						'todo_id' => $todo->getId(),
-						'todo_desc' => $todo->getDescription(),
-						'todo_status' => $todo->getCompleted(),
-					];
-				}
-			} else {
-				$response = [];
+		if(isset($ftodos)) {
+			foreach ($ftodos as $todo) {
+				$todos[] = [
+					'todo_count' => $todo_count,
+					'todo_id' => $todo->getId(),
+					'todo_desc' => $todo->getDescription(),
+					'todo_status' => $todo->getCompleted(),
+				];
 			}
-			
-			return new JsonResponse(json_encode($response));
+		} else {
+			$todos = [];
 		}
-		
-		$this->addFlash('notice', 'Todos filter set to: ' . strtoupper($filter) . '!');
-		
-		return $this->render('todo/index.html.twig', [
-			'text' => $customService->getStatus(),
-			'count' => $todo_count,
-			'todos' => $todos
-		]);
+			
+		return $todos;
     }
     
     /**
